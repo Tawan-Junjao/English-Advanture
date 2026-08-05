@@ -1,0 +1,96 @@
+
+const WORDS=[{"word": "apple", "emoji": "🍎", "letter": "A"}, {"word": "ant", "emoji": "🐜", "letter": "A"}, {"word": "alligator", "emoji": "🐊", "letter": "A"}, {"word": "bear", "emoji": "🐻", "letter": "B"}, {"word": "box", "emoji": "📦", "letter": "B"}, {"word": "bee", "emoji": "🐝", "letter": "B"}, {"word": "cat", "emoji": "🐱", "letter": "C"}, {"word": "car", "emoji": "🚗", "letter": "C"}, {"word": "cot", "emoji": "🛏️", "letter": "C"}, {"word": "dog", "emoji": "🐶", "letter": "D"}, {"word": "dad", "emoji": "👨", "letter": "D"}, {"word": "door", "emoji": "🚪", "letter": "D"}, {"word": "elephant", "emoji": "🐘", "letter": "E"}, {"word": "egg", "emoji": "🥚", "letter": "E"}, {"word": "eight", "emoji": "8️⃣", "letter": "E"}, {"word": "fox", "emoji": "🦊", "letter": "F"}, {"word": "fish", "emoji": "🐟", "letter": "F"}, {"word": "fan", "emoji": "🌀", "letter": "F"}, {"word": "girl", "emoji": "👧", "letter": "G"}, {"word": "goat", "emoji": "🐐", "letter": "G"}, {"word": "gift", "emoji": "🎁", "letter": "G"}, {"word": "hat", "emoji": "👒", "letter": "H"}, {"word": "horse", "emoji": "🐴", "letter": "H"}, {"word": "hand", "emoji": "✋", "letter": "H"}, {"word": "insect", "emoji": "🦗", "letter": "I"}, {"word": "iguana", "emoji": "🦎", "letter": "I"}, {"word": "igloo", "emoji": "🧊", "letter": "I"}, {"word": "jam", "emoji": "🍓", "letter": "J"}, {"word": "jet", "emoji": "✈️", "letter": "J"}, {"word": "juice", "emoji": "🧃", "letter": "J"}, {"word": "king", "emoji": "🤴", "letter": "K"}, {"word": "key", "emoji": "🔑", "letter": "K"}, {"word": "koala", "emoji": "🐨", "letter": "K"}, {"word": "lion", "emoji": "🦁", "letter": "L"}, {"word": "lemon", "emoji": "🍋", "letter": "L"}, {"word": "lamp", "emoji": "💡", "letter": "L"}, {"word": "mom", "emoji": "👩", "letter": "M"}, {"word": "milk", "emoji": "🥛", "letter": "M"}, {"word": "mitten", "emoji": "🧤", "letter": "M"}, {"word": "nurse", "emoji": "👩‍⚕️", "letter": "N"}, {"word": "neck", "emoji": "🧍", "letter": "N"}, {"word": "net", "emoji": "🥅", "letter": "N"}, {"word": "otter", "emoji": "🦦", "letter": "O"}, {"word": "octopus", "emoji": "🐙", "letter": "O"}, {"word": "ox", "emoji": "🐂", "letter": "O"}, {"word": "pen", "emoji": "🖊️", "letter": "P"}, {"word": "pot", "emoji": "🍲", "letter": "P"}, {"word": "pink", "emoji": "🩷", "letter": "P"}, {"word": "queen", "emoji": "👸", "letter": "Q"}, {"word": "quilt", "emoji": "🧵", "letter": "Q"}, {"word": "quarter", "emoji": "🪙", "letter": "Q"}, {"word": "red", "emoji": "🔴", "letter": "R"}, {"word": "ring", "emoji": "💍", "letter": "R"}, {"word": "rock", "emoji": "🪨", "letter": "R"}];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const KEY="englishAdventureV93Complete";
+let progress=JSON.parse(localStorage.getItem(KEY)||"{}");
+let current=null, mode="", q=0, total=10, lock=false, score=0;
+let monster={timer:null,time:16,progress:0,lives:3,built:[],target:""};
+const LETTER_NAME={
+A:"ay",B:"bee",C:"see",D:"dee",E:"ee",F:"eff",G:"gee",H:"aitch",I:"eye",
+J:"jay",K:"kay",L:"ell",M:"em",N:"en",O:"oh",P:"pee",Q:"cue",R:"are"
+};
+let voiceName=localStorage.getItem("voiceNameV93")||"";
+let voiceRate=Number(localStorage.getItem("voiceRateV93")||.72);
+let speechRun=0;
+function voices(){return speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang)||/English/i.test(v.name))}
+function selectedVoice(){const vs=voices();return vs.find(v=>v.name===voiceName)||vs.find(v=>/Samantha|Ava|Allison|Susan/i.test(v.name))||vs.find(v=>v.lang==="en-US")||vs[0]}
+function stopSpeech(){speechRun++;speechSynthesis.cancel()}
+function speakText(text,rate=voiceRate){
+  stopSpeech();
+  const run=speechRun;
+  return new Promise(resolve=>{
+    const u=new SpeechSynthesisUtterance(String(text).toLowerCase());
+    const v=selectedVoice();
+    if(v)u.voice=v;
+    u.lang=v?.lang||"en-US";
+    u.rate=rate;
+    u.pitch=1;
+    u.volume=1;
+    u.onend=resolve;u.onerror=resolve;
+    setTimeout(()=>{if(run===speechRun)speechSynthesis.speak(u);else resolve()},100);
+  });
+}
+function spellingPhrase(word){
+  return String(word).toUpperCase().split("").map(ch=>LETTER_NAME[ch]).filter(Boolean).join(", ");
+}
+function spellWord(word){
+  return speakText(spellingPhrase(word),Math.max(.58,voiceRate-.08));
+}
+function pick(){return WORDS[Math.floor(Math.random()*WORDS.length)]}
+function opts(w){return shuffle([w,...shuffle(WORDS.filter(x=>x.word!==w.word)).slice(0,3)])}
+function renderButtons(items,answer,display=x=>x.word){$("#answerArea").innerHTML=items.map(x=>`<button class="answer" data-v="${x.word}">${display(x)}</button>`).join("");$$(".answer").forEach(b=>b.onclick=()=>b.dataset.v===answer?(b.classList.add("correct"),correct()):wrong(b))}
+function start(m){mode=m;q=0;score=0;show("game");next()}
+function next(){clearInterval(monster.timer);$("#monsterHud").hidden=true;lock=false;q++;current=pick();$("#progress").textContent=`ข้อ ${q}/${total}`;$("#feedback").textContent="";if(mode==="picture"){$("#prompt").textContent="รูปนี้คือคำว่าอะไร?";$("#visual").textContent=current.emoji;renderButtons(opts(current),current.word);speakText(current.word)}else if(mode==="listen"){$("#prompt").textContent="ฟังแล้วแตะรูป";$("#visual").textContent="🔊";renderButtons(opts(current),current.word,x=>`${x.emoji}<br><small>${x.word}</small>`);speakText(current.word)}else if(mode==="spell")renderSpell()}
+function renderSpell(){$("#prompt").textContent="ฟังเสียงสะกด แล้วเรียงตัวอักษร";$("#visual").textContent=current.emoji;let built=[];$("#answerArea").innerHTML=`<div style="grid-column:1/-1"><div class="slots">${current.word.split("").map(()=>'<div class="slot"></div>').join("")}</div><div class="letters">${shuffle(current.word.toUpperCase().split("")).map(l=>`<button class="letter-btn" data-l="${l}">${l}</button>`).join("")}</div></div>`;$$(".letter-btn").forEach(b=>b.onclick=()=>{if(b.disabled)return;const exp=current.word.toUpperCase()[built.length];if(b.dataset.l===exp){b.disabled=true;built.push(exp);$$(".slot")[built.length-1].textContent=exp;if(built.length===current.word.length)correct()}else wrong(b)});setTimeout(()=>spellWord(current.word),250)}
+function correct(){if(lock)return;lock=true;rec(true);score++;$("#feedback").textContent="เก่งมาก! ⭐";speakText("great job",.82);setTimeout(()=>q>=total?finish():next(),850)}
+function wrong(b){rec(false);b?.classList.add("wrong");$("#feedback").textContent="ลองอีกครั้งนะ";setTimeout(()=>b?.classList.remove("wrong"),350)}
+function finish(){$("#prompt").textContent="จบรอบแล้ว 🎉";$("#visual").textContent="🏆";$("#answerArea").innerHTML='<button class="answer" id="again">เล่นอีกครั้ง</button><button class="answer" id="homeBtn">หน้าแรก</button>';$("#feedback").textContent=`ทำได้ ${score} จาก ${total} ข้อ`;$("#again").onclick=()=>start(mode);$("#homeBtn").onclick=()=>show("home")}
+
+
+function rebuildMonsterScene(){
+  const track=document.querySelector(".monster-track");
+  if(!track)return;
+  track.innerHTML='<div class="cloud c1">☁️</div><div class="cloud c2">☁️</div><div id="heroChar" class="hero-char">🧒</div><div id="monsterChar" class="monster-char">👾</div>';
+  const fill=$("#dangerFill");
+  if(fill)fill.style.width="0%";
+}
+function monsterConfig(){const d=localStorage.getItem("monsterDiffV9")||"normal";return d==="easy"?{time:22,step:4,lives:3}:d==="hard"?{time:12,step:8,lives:2}:{time:16,step:6,lives:3}}
+function startMonster(){mode="monster";q=0;total=8;score=0;show("game");monsterRound()}
+function updateMonster(){$("#monsterTimer").textContent=`⏱️ ${monster.time}`;$("#monsterLives").textContent="❤️".repeat(monster.lives);$("#monsterChar").style.left=`${Math.max(18,84-monster.progress)}%`;$("#dangerFill").style.width=`${Math.min(100,monster.progress/66*100)}%`}
+function monsterRound(){
+clearInterval(monster.timer);
+stopSpeech();
+rebuildMonsterScene();
+lock=false;
+q++;
+current=pick();
+const c=monsterConfig();monster.time=c.time;monster.progress=0;monster.lives=c.lives;monster.built=[];monster.target=current.word.toUpperCase();$("#progress").textContent=`รอบ ${q}/${total}`;$("#monsterHud").hidden=false;$("#prompt").textContent="ฟังเสียงสะกด แล้วกดให้ทัน!";$("#visual").textContent=current.emoji;$("#feedback").innerHTML='<div class="monster-message">👾 สัตว์ประหลาดกำลังมา!</div>';$("#answerArea").innerHTML=`<div style="grid-column:1/-1"><div class="slots">${monster.target.split("").map(()=>'<div class="slot"></div>').join("")}</div><div class="letters">${shuffle(monster.target.split("")).map(l=>`<button class="letter-btn" data-l="${l}">${l}</button>`).join("")}</div></div>`;$$(".letter-btn").forEach(b=>b.onclick=()=>monsterPress(b));updateMonster();setTimeout(()=>spellWord(current.word),250);monster.timer=setInterval(()=>{monster.time--;monster.progress+=c.step;updateMonster();if(monster.time<=0||monster.progress>=66)monsterCaught()},1000)}
+function monsterPress(b){if(lock||b.disabled)return;const exp=monster.target[monster.built.length],ch=b.dataset.l;if(ch===exp){b.disabled=true;monster.built.push(ch);$$(".slot")[monster.built.length-1].textContent=ch;monster.progress=Math.max(0,monster.progress-5);updateMonster();if(monster.built.length===monster.target.length)monsterEscaped()}else{monster.lives--;monster.progress+=10;updateMonster();b.classList.add("wrong");setTimeout(()=>b.classList.remove("wrong"),300);if(monster.lives<=0||monster.progress>=66)monsterCaught()}}
+function monsterEscaped(){
+if(lock)return;
+lock=true;
+clearInterval(monster.timer);
+stopSpeech();
+rec(true);
+score++;
+$("#heroChar").style.left="72%";
+$("#monsterChar").style.left="92%";
+$("#feedback").innerHTML='<div class="monster-message">🚁 หนีสำเร็จ! เก่งมาก!</div>';
+speakText("great job",.82);
+setTimeout(()=>{
+rebuildMonsterScene();
+if(q>=total)monsterFinish();else monsterRound();
+},1200)
+}
+function monsterCaught(){if(lock)return;lock=true;clearInterval(monster.timer);rec(false);$("#monsterChar").style.left="18%";$("#heroChar").classList.add("caught");$("#feedback").innerHTML='<div class="monster-message">😄 ถูกจับแล้ว ลองใหม่อีกครั้ง!</div>';speakText("try again",.82);$("#answerArea").insertAdjacentHTML("beforeend",'<button class="answer" id="retry">ลองคำนี้อีกครั้ง</button>');$("#retry").onclick=()=>{q--;monsterRound()}}
+function monsterFinish(){$("#prompt").textContent="จบด่าน Monster Escape! 🎉";$("#visual").textContent="🏆";$("#monsterHud").hidden=true;$("#answerArea").innerHTML='<button class="answer" id="mAgain">เล่นอีกครั้ง</button><button class="answer" id="mHome">หน้าแรก</button>';$("#feedback").textContent=`หนีสำเร็จ ${score} จาก ${total} รอบ`;$("#mAgain").onclick=startMonster;$("#mHome").onclick=()=>show("home")}
+
+function voicePage(){show("voice");const vs=voices(),sel=$("#voiceSelect");sel.innerHTML=vs.map(v=>`<option value="${v.name}">${v.name} — ${v.lang}</option>`).join("");if(selectedVoice())sel.value=selectedVoice().name;$("#voiceRate").value=voiceRate;$("#rateValue").textContent=voiceRate.toFixed(2);$("#voiceStatus").textContent=selectedVoice()?`กำลังใช้: ${selectedVoice().name}`:"ไม่พบเสียงภาษาอังกฤษ"}
+speechSynthesis.onvoiceschanged=()=>{if($("#voice").classList.contains("active"))voicePage()};
+$("#voiceSelect").onchange=e=>voiceName=e.target.value;$("#voiceRate").oninput=e=>{voiceRate=Number(e.target.value);$("#rateValue").textContent=voiceRate.toFixed(2)};$$("[data-test]").forEach(b=>b.onclick=()=>speakText(LETTER_NAME[b.dataset.test],voiceRate));$("#saveVoice").onclick=()=>{localStorage.setItem("voiceNameV93",voiceName);localStorage.setItem("voiceRateV93",voiceRate);$("#voiceStatus").textContent="บันทึกแล้ว ✅"};
+function parentPage(){show("parent");const vals=Object.values(progress),c=vals.reduce((a,v)=>a+v.correct,0),w=vals.reduce((a,v)=>a+v.wrong,0);$("#summary").innerHTML=`<div><strong>${Object.keys(progress).length}</strong>คำที่ฝึก</div><div><strong>${c}</strong>ถูก</div><div><strong>${w}</strong>ลองใหม่</div>`;$("#weakWords").innerHTML=WORDS.map(x=>({...x,...(progress[x.word]||{correct:0,wrong:0})})).sort((a,b)=>(b.wrong-b.correct)-(a.wrong-a.correct)).slice(0,12).map(x=>`<div class="row"><span>${x.emoji} <b>${x.word}</b></span><span>ถูก ${x.correct} / ผิด ${x.wrong}</span></div>`).join("")}
+
+$$("[data-action]").forEach(b=>b.onclick=()=>{const a=b.dataset.action;if(a==="monster")startMonster();else if(["spell","picture","listen"].includes(a))start(a);else if(a==="voice")voicePage();else parentPage()});
+$$(".back").forEach(b=>b.onclick=()=>{clearInterval(monster.timer);stopSpeech();rebuildMonsterScene();show("home")});
+$("#wordSound").onclick=()=>current&&speakText(current.word);$("#spellSound").onclick=()=>current&&spellWord(current.word);$("#reset").onclick=()=>{if(confirm("ล้างข้อมูลทั้งหมดหรือไม่?")){progress={};save();parentPage()}};
+save();

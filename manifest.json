@@ -1,7 +1,7 @@
 {
-  "name": "English Adventure V3.2",
-  "short_name": "English V3.2",
-  "description": "เกมฝึกภาษาอังกฤษ พร้อมระบบสะกดชื่ออักษรที่ไม่พูดคำว่า capital",
+  "name": "English Adventure V3.3",
+  "short_name": "English V3.3",
+  "description": "โหมดเรียงตัวอักษรใช้รูปและเสียงสะกดโดยไม่มีคำตัวอย่าง",
   "start_url": "./index.html?v=3",
   "scope": "./",
   "display": "standalone",

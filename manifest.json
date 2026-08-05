@@ -1,13 +1,12 @@
 {
-  "name": "English Adventure V9 Monster Escape",
+  "name": "English Adventure V9 Complete",
   "short_name": "English V9",
-  "description": "เกมภาษาอังกฤษที่ปรับเสียง Apple สำหรับ iPhone และ iPad",
-  "start_url": "./index.html?v=3",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fff8ea",
-  "theme_color": "#5b5ce2",
+  "background_color": "#fff9ef",
+  "theme_color": "#6657e8",
   "lang": "th",
   "icons": [
     {

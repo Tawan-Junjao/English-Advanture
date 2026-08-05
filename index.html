@@ -1,68 +1,86 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#5b5ce2"><title>English Adventure V9</title><link rel="manifest" href="manifest.json?v=50"><link rel="stylesheet" href="style.css?v=50"></head><body><div class="app"><header><div><h1>🌈 English Adventure <span>V9</span></h1><p>รู้ตัวอักษร • ฟังเสียง • สะกด • อ่านคำ</p></div><div class="right"><button id="installBtn" hidden>📲 ติดตั้ง</button><div class="score">⭐ <span id="stars">0</span></div></div></header>
-<section id="home" class="screen active"><div class="hero"><div class="lion">🦁</div><h2>บทเรียนวันนี้</h2><p>ระบบจะเน้นคำที่ยังไม่แม่น และทบทวนซ้ำอย่างเหมาะสม</p><button class="primary" data-mode="lesson">▶ เริ่มบทเรียน 12 ข้อ</button><div class="version">เวอร์ชัน 9.0 — Monster Escape — Apple Voice สำหรับ iPhone/iPad — Piper Neural Voice — รองรับ Azure Neural Voice — รองรับเสียงคนจริง</div></div><div class="menu">
-<button data-page="letters">🔠<b>เรียนตัวอักษร A–R</b><small>ชื่ออักษรและเสียงต้นคำ</small></button><button data-mode="readspell">👂<b>ฟังคำและสะกด</b><small>C – A – T, cat</small></button><button data-mode="picture">🖼️<b>ดูรูป เลือกคำ</b><small>Picture Match</small></button><button data-mode="listen">🔊<b>ฟังแล้วเลือกรูป</b><small>Listening</small></button><button data-mode="spell">🔤<b>กดเรียงตัวอักษร</b><small>Spelling</small></button><button data-mode="missing">🧩<b>เติมตัวอักษร</b><small>Missing Letter</small></button><button data-mode="memory">🃏<b>จับคู่ภาพกับคำ</b><small>Memory</small></button><button data-mode="speak">🎤<b>พูดตาม</b><small>Pronunciation</small></button><button data-page="studio">🎙️<b>ห้องบันทึกเสียง</b><small>อัดเสียงคนจริงแทนเสียงเดิม</small></button><button data-page="voice">🎧<b>ตั้งค่าเสียง Apple</b><small>ทดสอบ A–I–L ก่อนเล่น</small></button><button data-page="parent">📊<b>ผลการเรียน</b><small>สำหรับผู้ปกครอง</small></button></div><p id="iosTip" class="tip" hidden>iPhone: เปิดด้วย Safari → แชร์ → เพิ่มไปยังหน้าจอโฮม</p></section>
-<section id="letters" class="screen"><div class="bar"><button class="back">← กลับ</button><h2>เรียนตัวอักษร</h2><span></span></div><div id="letterGrid" class="letters"></div></section>
-<section id="game" class="screen"><div class="bar"><button class="back">← กลับ</button><div id="progress"></div><div class="audio"><button id="wordBtn">🔊 อ่านคำ</button><button id="spellBtn">🔤 สะกดทีละตัว</button></div></div><div class="game"><div id="prompt" class="prompt"></div><div id="visual" class="visual"></div>
-<div id="monsterHud" class="monster-hud" hidden>
-  <div class="monster-track"><div id="heroChar" class="hero-char">🧒</div><div id="monsterChar" class="monster-char">👾</div></div>
-  <div class="monster-status"><span id="monsterTimer">⏱️ 16</span><span id="monsterLives">❤️❤️❤️</span></div>
-  <div class="danger-meter"><span id="dangerFill"></span></div>
-</div><div id="hint" class="hint"></div><div id="answers" class="answers"></div><div id="feedback" class="feedback"></div></div></section>
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6657e8">
+<title>English Adventure V9 Complete</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<header>
+  <div><h1>🌈 English Adventure <span>V9</span></h1><p>สำหรับ iPhone / iPad</p></div>
+  <div class="score">⭐ <span id="stars">0</span></div>
+</header>
 
-<section id="studio" class="screen">
-  <div class="bar"><button class="back">← กลับ</button><h2>🎙️ ห้องบันทึกเสียงจริง</h2><span></span></div>
-  <div class="panel studio-help">
-    <p><b>วิธีใช้:</b> เลือกตัวอักษรหรือคำศัพท์ → กดอัด → พูด → กดหยุด → ฟังทดสอบ → บันทึก</p>
-    <p>เสียงที่บันทึกจะใช้แทนไฟล์เสียงเดิมเฉพาะเครื่องนี้ทันที</p>
-    <div class="studio-tools">
-      <button id="exportAudioBtn">⬇️ สำรองเสียง</button>
-      <label class="import-label">⬆️ นำเข้าเสียง<input id="importAudioInput" type="file" accept=".json,application/json" hidden></label>
-      <button id="clearAudioBtn" class="danger">🗑️ ล้างเสียงที่อัด</button>
+<section id="home" class="screen active">
+  <div class="hero">
+    <div class="mascot">🦁</div>
+    <h2>เลือกเกม</h2>
+    <p>ฝึกฟัง อ่าน และสะกดคำศัพท์ A–R</p>
+  </div>
+  <div class="menu">
+    <button data-action="monster"><span>👾</span><b>Monster Escape</b><small>สะกดให้ทันก่อนถูกจับ</small></button>
+    <button data-action="spell"><span>🔤</span><b>เรียงตัวอักษร</b><small>ฟังแล้วสะกด</small></button>
+    <button data-action="picture"><span>🖼️</span><b>ดูรูปเลือกคำ</b><small>Picture Match</small></button>
+    <button data-action="listen"><span>🔊</span><b>ฟังแล้วแตะ</b><small>Listen & Touch</small></button>
+    <button data-action="voice"><span>🎧</span><b>ตั้งค่าเสียง Apple</b><small>ทดสอบ A–I–L</small></button>
+    <button data-action="parent"><span>📊</span><b>ผลการฝึก</b><small>สำหรับผู้ปกครอง</small></button>
+  </div>
+</section>
+
+<section id="game" class="screen">
+  <div class="bar">
+    <button class="back">← กลับ</button>
+    <div id="progress"></div>
+    <div class="bar-buttons">
+      <button id="wordSound">🔊 อ่านคำ</button>
+      <button id="spellSound">🔤 สะกด</button>
     </div>
   </div>
-  <div class="studio-tabs">
-    <button class="studio-tab active" data-studio-tab="letters">ตัวอักษร A–R</button>
-    <button class="studio-tab" data-studio-tab="words">คำศัพท์</button>
-  </div>
-  <div id="recordingGrid" class="recording-grid"></div>
-  <div id="recorderPanel" class="recorder-panel" hidden>
-    <div id="recordTarget" class="record-target"></div>
-    <div id="recordStatus" class="record-status">พร้อมบันทึก</div>
-    <div class="record-actions">
-      <button id="startRecordBtn" class="record-main">⏺ เริ่มอัด</button>
-      <button id="stopRecordBtn" disabled>⏹ หยุด</button>
-      <button id="previewRecordBtn" disabled>▶ ฟังที่อัด</button>
-      <button id="saveRecordBtn" disabled>💾 บันทึกเสียงนี้</button>
-      <button id="deleteRecordBtn" class="danger">ลบเสียงเดิม</button>
+  <div class="game-card">
+    <div id="prompt" class="prompt"></div>
+    <div id="visual" class="visual"></div>
+
+    <div id="monsterHud" class="monster-hud" hidden>
+      <div class="monster-track">
+        <div class="cloud c1">☁️</div><div class="cloud c2">☁️</div>
+        <div id="heroChar" class="hero-char">🧒</div>
+        <div id="monsterChar" class="monster-char">👾</div>
+      </div>
+      <div class="monster-status">
+        <span id="monsterTimer">⏱️ 16</span>
+        <span id="monsterLives">❤️❤️❤️</span>
+      </div>
+      <div class="danger-meter"><span id="dangerFill"></span></div>
     </div>
+
+    <div id="answerArea" class="answers"></div>
+    <div id="feedback" class="feedback"></div>
   </div>
 </section>
 
 <section id="voice" class="screen">
-  <div class="bar"><button class="back">← กลับ</button><h2>🎧 ตั้งค่าเสียง Apple</h2><span></span></div>
-  <div class="panel voice-panel">
-    <p><b>เลือกเสียงที่ฟัง A, I และ L แยกกันชัดที่สุด</b></p>
-    <label class="voice-label">เสียงภาษาอังกฤษ
-      <select id="voiceSelect"></select>
-    </label>
-    <label class="voice-label">ความเร็ว
-      <input id="voiceRate" type="range" min="0.55" max="1.0" step="0.05" value="0.72">
-      <span id="voiceRateValue">0.72</span>
-    </label>
+  <div class="bar"><button class="back">← กลับ</button><h2>ตั้งค่าเสียง Apple</h2><span></span></div>
+  <div class="panel">
+    <label>เสียงภาษาอังกฤษ<select id="voiceSelect"></select></label>
+    <label>ความเร็ว<input id="voiceRate" type="range" min=".55" max="1" step=".05" value=".72"><span id="rateValue">0.72</span></label>
     <div class="voice-tests">
-      <button data-test-letter="A">▶ ฟัง A</button>
-      <button data-test-letter="I">▶ ฟัง I</button>
-      <button data-test-letter="L">▶ ฟัง L</button>
-      <button id="testAIL">▶ ฟัง A – I – L</button>
+      <button data-test="A">▶ A</button><button data-test="I">▶ I</button><button data-test="L">▶ L</button>
     </div>
-    <div class="voice-compare">
-      <div><strong>A</strong><small>ay — เอ</small></div>
-      <div><strong>I</strong><small>eye — อาย</small></div>
-      <div><strong>L</strong><small>ell — แอล</small></div>
-    </div>
-    <p id="voiceStatus" class="tip">กำลังค้นหาเสียงภาษาอังกฤษในเครื่อง…</p>
-    <button id="saveVoiceBtn" class="primary">บันทึกเสียงนี้</button>
+    <button id="saveVoice" class="primary">บันทึกเสียงนี้</button>
+    <p id="voiceStatus" class="tip"></p>
   </div>
 </section>
 
-<section id="parent" class="screen"><div class="bar"><button class="back">← กลับ</button><h2>ผลการเรียน</h2><button id="resetBtn">ล้างข้อมูล</button></div><div id="summary" class="summary"></div><div class="panel"><h3>คำที่ควรทบทวน</h3><div id="weak"></div></div><div class="panel"><h3>ผลรายตัวอักษร</h3><div id="letterStats"></div></div></section></div><script src="app.js?v=50"></script></body></html>
+<section id="parent" class="screen">
+  <div class="bar"><button class="back">← กลับ</button><h2>ผลการฝึก</h2><button id="reset">ล้างข้อมูล</button></div>
+  <div id="summary" class="summary"></div>
+  <div class="panel"><h3>คำที่ควรทบทวน</h3><div id="weakWords"></div></div>
+</section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

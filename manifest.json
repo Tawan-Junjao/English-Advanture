@@ -1,7 +1,7 @@
 {
-  "name": "English Adventure V5",
-  "short_name": "English V5",
-  "description": "เกมภาษาอังกฤษพร้อมห้องบันทึกเสียงคนจริงสำหรับตัวอักษรและคำศัพท์",
+  "name": "English Adventure V8 for iPhone & iPad",
+  "short_name": "English V8",
+  "description": "เกมภาษาอังกฤษที่ปรับเสียง Apple สำหรับ iPhone และ iPad",
   "start_url": "./index.html?v=3",
   "scope": "./",
   "display": "standalone",

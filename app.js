@@ -1,99 +1,110 @@
-const VERSION="5.0.0";const WORDS=[{"word": "apple", "emoji": "🍎", "letter": "A", "thai": "แอป-เพิล"}, {"word": "ant", "emoji": "🐜", "letter": "A", "thai": "แอนท์"}, {"word": "alligator", "emoji": "🐊", "letter": "A", "thai": "แอล-ลิ-เก-เทอร์"}, {"word": "bear", "emoji": "🐻", "letter": "B", "thai": "แบร์"}, {"word": "box", "emoji": "📦", "letter": "B", "thai": "บ็อกซ์"}, {"word": "bee", "emoji": "🐝", "letter": "B", "thai": "บี"}, {"word": "cat", "emoji": "🐱", "letter": "C", "thai": "แคท"}, {"word": "car", "emoji": "🚗", "letter": "C", "thai": "คาร์"}, {"word": "cot", "emoji": "🛏️", "letter": "C", "thai": "ค็อท"}, {"word": "dog", "emoji": "🐶", "letter": "D", "thai": "ด็อก"}, {"word": "dad", "emoji": "👨", "letter": "D", "thai": "แดด"}, {"word": "door", "emoji": "🚪", "letter": "D", "thai": "ดอร์"}, {"word": "elephant", "emoji": "🐘", "letter": "E", "thai": "เอล-ละ-เฟินท์"}, {"word": "egg", "emoji": "🥚", "letter": "E", "thai": "เอ็ก"}, {"word": "eight", "emoji": "8️⃣", "letter": "E", "thai": "เอท"}, {"word": "fox", "emoji": "🦊", "letter": "F", "thai": "ฟ็อกซ์"}, {"word": "fish", "emoji": "🐟", "letter": "F", "thai": "ฟิช"}, {"word": "fan", "emoji": "🌀", "letter": "F", "thai": "แฟน"}, {"word": "girl", "emoji": "👧", "letter": "G", "thai": "เกิร์ล"}, {"word": "goat", "emoji": "🐐", "letter": "G", "thai": "โกท"}, {"word": "gift", "emoji": "🎁", "letter": "G", "thai": "กิฟท์"}, {"word": "hat", "emoji": "👒", "letter": "H", "thai": "แฮท"}, {"word": "horse", "emoji": "🐴", "letter": "H", "thai": "ฮอร์ส"}, {"word": "hand", "emoji": "✋", "letter": "H", "thai": "แฮนด์"}, {"word": "insect", "emoji": "🦗", "letter": "I", "thai": "อิน-เซ็กท์"}, {"word": "iguana", "emoji": "🦎", "letter": "I", "thai": "อิ-กวา-นะ"}, {"word": "igloo", "emoji": "🧊", "letter": "I", "thai": "อิก-ลู"}, {"word": "jam", "emoji": "🍓", "letter": "J", "thai": "แจม"}, {"word": "jet", "emoji": "✈️", "letter": "J", "thai": "เจ็ต"}, {"word": "juice", "emoji": "🧃", "letter": "J", "thai": "จูซ"}, {"word": "king", "emoji": "🤴", "letter": "K", "thai": "คิง"}, {"word": "key", "emoji": "🔑", "letter": "K", "thai": "คี"}, {"word": "koala", "emoji": "🐨", "letter": "K", "thai": "โค-อา-ละ"}, {"word": "lion", "emoji": "🦁", "letter": "L", "thai": "ไล-อัน"}, {"word": "lemon", "emoji": "🍋", "letter": "L", "thai": "เลม-เมิน"}, {"word": "lamp", "emoji": "💡", "letter": "L", "thai": "แลมพ์"}, {"word": "mom", "emoji": "👩", "letter": "M", "thai": "มอม"}, {"word": "milk", "emoji": "🥛", "letter": "M", "thai": "มิลค์"}, {"word": "mitten", "emoji": "🧤", "letter": "M", "thai": "มิท-เทิน"}, {"word": "nurse", "emoji": "👩‍⚕️", "letter": "N", "thai": "เนิร์ส"}, {"word": "neck", "emoji": "🧍", "letter": "N", "thai": "เน็ก"}, {"word": "net", "emoji": "🥅", "letter": "N", "thai": "เน็ต"}, {"word": "otter", "emoji": "🦦", "letter": "O", "thai": "ออท-เทอร์"}, {"word": "octopus", "emoji": "🐙", "letter": "O", "thai": "อ็อค-ทะ-พัส"}, {"word": "ox", "emoji": "🐂", "letter": "O", "thai": "อ็อกซ์"}, {"word": "pen", "emoji": "🖊️", "letter": "P", "thai": "เพ็น"}, {"word": "pot", "emoji": "🍲", "letter": "P", "thai": "พ็อท"}, {"word": "pink", "emoji": "🩷", "letter": "P", "thai": "พิงก์"}, {"word": "queen", "emoji": "👸", "letter": "Q", "thai": "ควีน"}, {"word": "quilt", "emoji": "🧵", "letter": "Q", "thai": "ควิลท์"}, {"word": "quarter", "emoji": "🪙", "letter": "Q", "thai": "ควอร์-เทอร์"}, {"word": "red", "emoji": "🔴", "letter": "R", "thai": "เรด"}, {"word": "ring", "emoji": "💍", "letter": "R", "thai": "ริง"}, {"word": "rock", "emoji": "🪨", "letter": "R", "thai": "ร็อก"}];const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const KEY="englishAdventureV5";let S={mode:null,q:0,total:12,current:null,lock:false,score:0,filter:null,progress:JSON.parse(localStorage.getItem(KEY)||"{}")};
+const VERSION="8.0.0";const WORDS=[{"word": "apple", "emoji": "🍎", "letter": "A", "thai": "แอป-เพิล"}, {"word": "ant", "emoji": "🐜", "letter": "A", "thai": "แอนท์"}, {"word": "alligator", "emoji": "🐊", "letter": "A", "thai": "แอล-ลิ-เก-เทอร์"}, {"word": "bear", "emoji": "🐻", "letter": "B", "thai": "แบร์"}, {"word": "box", "emoji": "📦", "letter": "B", "thai": "บ็อกซ์"}, {"word": "bee", "emoji": "🐝", "letter": "B", "thai": "บี"}, {"word": "cat", "emoji": "🐱", "letter": "C", "thai": "แคท"}, {"word": "car", "emoji": "🚗", "letter": "C", "thai": "คาร์"}, {"word": "cot", "emoji": "🛏️", "letter": "C", "thai": "ค็อท"}, {"word": "dog", "emoji": "🐶", "letter": "D", "thai": "ด็อก"}, {"word": "dad", "emoji": "👨", "letter": "D", "thai": "แดด"}, {"word": "door", "emoji": "🚪", "letter": "D", "thai": "ดอร์"}, {"word": "elephant", "emoji": "🐘", "letter": "E", "thai": "เอล-ละ-เฟินท์"}, {"word": "egg", "emoji": "🥚", "letter": "E", "thai": "เอ็ก"}, {"word": "eight", "emoji": "8️⃣", "letter": "E", "thai": "เอท"}, {"word": "fox", "emoji": "🦊", "letter": "F", "thai": "ฟ็อกซ์"}, {"word": "fish", "emoji": "🐟", "letter": "F", "thai": "ฟิช"}, {"word": "fan", "emoji": "🌀", "letter": "F", "thai": "แฟน"}, {"word": "girl", "emoji": "👧", "letter": "G", "thai": "เกิร์ล"}, {"word": "goat", "emoji": "🐐", "letter": "G", "thai": "โกท"}, {"word": "gift", "emoji": "🎁", "letter": "G", "thai": "กิฟท์"}, {"word": "hat", "emoji": "👒", "letter": "H", "thai": "แฮท"}, {"word": "horse", "emoji": "🐴", "letter": "H", "thai": "ฮอร์ส"}, {"word": "hand", "emoji": "✋", "letter": "H", "thai": "แฮนด์"}, {"word": "insect", "emoji": "🦗", "letter": "I", "thai": "อิน-เซ็กท์"}, {"word": "iguana", "emoji": "🦎", "letter": "I", "thai": "อิ-กวา-นะ"}, {"word": "igloo", "emoji": "🧊", "letter": "I", "thai": "อิก-ลู"}, {"word": "jam", "emoji": "🍓", "letter": "J", "thai": "แจม"}, {"word": "jet", "emoji": "✈️", "letter": "J", "thai": "เจ็ต"}, {"word": "juice", "emoji": "🧃", "letter": "J", "thai": "จูซ"}, {"word": "king", "emoji": "🤴", "letter": "K", "thai": "คิง"}, {"word": "key", "emoji": "🔑", "letter": "K", "thai": "คี"}, {"word": "koala", "emoji": "🐨", "letter": "K", "thai": "โค-อา-ละ"}, {"word": "lion", "emoji": "🦁", "letter": "L", "thai": "ไล-อัน"}, {"word": "lemon", "emoji": "🍋", "letter": "L", "thai": "เลม-เมิน"}, {"word": "lamp", "emoji": "💡", "letter": "L", "thai": "แลมพ์"}, {"word": "mom", "emoji": "👩", "letter": "M", "thai": "มอม"}, {"word": "milk", "emoji": "🥛", "letter": "M", "thai": "มิลค์"}, {"word": "mitten", "emoji": "🧤", "letter": "M", "thai": "มิท-เทิน"}, {"word": "nurse", "emoji": "👩‍⚕️", "letter": "N", "thai": "เนิร์ส"}, {"word": "neck", "emoji": "🧍", "letter": "N", "thai": "เน็ก"}, {"word": "net", "emoji": "🥅", "letter": "N", "thai": "เน็ต"}, {"word": "otter", "emoji": "🦦", "letter": "O", "thai": "ออท-เทอร์"}, {"word": "octopus", "emoji": "🐙", "letter": "O", "thai": "อ็อค-ทะ-พัส"}, {"word": "ox", "emoji": "🐂", "letter": "O", "thai": "อ็อกซ์"}, {"word": "pen", "emoji": "🖊️", "letter": "P", "thai": "เพ็น"}, {"word": "pot", "emoji": "🍲", "letter": "P", "thai": "พ็อท"}, {"word": "pink", "emoji": "🩷", "letter": "P", "thai": "พิงก์"}, {"word": "queen", "emoji": "👸", "letter": "Q", "thai": "ควีน"}, {"word": "quilt", "emoji": "🧵", "letter": "Q", "thai": "ควิลท์"}, {"word": "quarter", "emoji": "🪙", "letter": "Q", "thai": "ควอร์-เทอร์"}, {"word": "red", "emoji": "🔴", "letter": "R", "thai": "เรด"}, {"word": "ring", "emoji": "💍", "letter": "R", "thai": "ริง"}, {"word": "rock", "emoji": "🪨", "letter": "R", "thai": "ร็อก"}];const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const KEY="englishAdventureV8";let S={mode:null,q:0,total:12,current:null,lock:false,score:0,filter:null,progress:JSON.parse(localStorage.getItem(KEY)||"{}")};
 function show(id){$$('.screen').forEach(x=>x.classList.remove('active'));$('#'+id).classList.add('active')}function shuffle(a){return[...a].sort(()=>Math.random()-.5)}function save(){localStorage.setItem(KEY,JSON.stringify(S.progress));$('#stars').textContent=Object.values(S.progress).reduce((a,v)=>a+(v.correct||0)*2,0)}function stat(w){return S.progress[w.word]||{correct:0,wrong:0}}function pool(){return S.filter?WORDS.filter(w=>w.letter===S.filter):WORDS}function pick(){let p=[];pool().forEach(w=>{let s=stat(w),n=Math.max(1,4+s.wrong-s.correct);for(let i=0;i<n;i++)p.push(w)});return p[Math.floor(Math.random()*p.length)]}
-const AUDIO_VERSION="5.0.0";
+const AUDIO_VERSION="8.0.0";
+const VOICE_PREF_KEY="englishAdventureAppleVoiceV8";
+const LETTER_SPEECH={
+  A:"ay",B:"bee",C:"see",D:"dee",E:"ee",F:"eff",G:"gee",H:"aitch",I:"eye",
+  J:"jay",K:"kay",L:"ell",M:"em",N:"en",O:"oh",P:"pee",Q:"cue",R:"are",
+  S:"ess",T:"tee",U:"you",V:"vee",W:"double you",X:"ex",Y:"why",Z:"zee"
+};
+let appleVoices=[];
+let selectedVoiceName="";
+let selectedVoiceRate=.72;
+let speechRun=0;
 
-const AUDIO_DB_NAME="EnglishAdventureHumanAudio";
-const AUDIO_STORE="recordings";
-let audioDbPromise=null;
-function openAudioDb(){
-  if(audioDbPromise)return audioDbPromise;
-  audioDbPromise=new Promise((resolve,reject)=>{
-    const req=indexedDB.open(AUDIO_DB_NAME,1);
-    req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(AUDIO_STORE))db.createObjectStore(AUDIO_STORE)};
-    req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);
-  });return audioDbPromise;
+function loadVoicePreference(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(VOICE_PREF_KEY)||"{}");
+    selectedVoiceName=saved.name||"";
+    selectedVoiceRate=Number(saved.rate)||.72;
+  }catch{}
 }
-async function getRecordedAudio(key){try{const db=await openAudioDb();return await new Promise((resolve,reject)=>{const tx=db.transaction(AUDIO_STORE,"readonly"),req=tx.objectStore(AUDIO_STORE).get(key);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error)})}catch{return null}}
-async function setRecordedAudio(key,blob){const db=await openAudioDb();return new Promise((resolve,reject)=>{const tx=db.transaction(AUDIO_STORE,"readwrite");tx.objectStore(AUDIO_STORE).put(blob,key);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
-async function deleteRecordedAudio(key){const db=await openAudioDb();return new Promise((resolve,reject)=>{const tx=db.transaction(AUDIO_STORE,"readwrite");tx.objectStore(AUDIO_STORE).delete(key);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
-async function listRecordedAudio(){const db=await openAudioDb();return new Promise((resolve,reject)=>{const tx=db.transaction(AUDIO_STORE,"readonly"),store=tx.objectStore(AUDIO_STORE),keys=store.getAllKeys(),vals=store.getAll();tx.oncomplete=()=>resolve(keys.result.map((key,i)=>({key,blob:vals.result[i]})));tx.onerror=()=>reject(tx.error)})}
-async function clearRecordedAudio(){const db=await openAudioDb();return new Promise((resolve,reject)=>{const tx=db.transaction(AUDIO_STORE,"readwrite");tx.objectStore(AUDIO_STORE).clear();tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
-function blobToDataUrl(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob)})}
-async function dataUrlToBlob(dataUrl){const res=await fetch(dataUrl);return await res.blob()}
-
-let activeAudio=null;
-let audioRun=0;
+loadVoicePreference();
 
 function stopAudio(){
-  audioRun++;
-  if(activeAudio){
-    activeAudio.pause();
-    activeAudio.currentTime=0;
-    activeAudio=null;
-  }
+  speechRun++;
+  if("speechSynthesis" in window)speechSynthesis.cancel();
 }
 
-function playFile(src, volume=1){
-  return new Promise(resolve=>{
-    stopAudio();
-    const run=audioRun;
-    const a=new Audio(src);
-    activeAudio=a;
-    a.preload="auto";
-    a.volume=volume;
-    a.onended=()=>{if(run===audioRun)activeAudio=null;resolve()};
-    a.onerror=()=>{activeAudio=null;resolve()};
-    a.play().catch(()=>resolve());
+function refreshAppleVoices(){
+  if(!("speechSynthesis" in window))return [];
+  const all=speechSynthesis.getVoices();
+  appleVoices=all.filter(v=>/^en(-|_)/i.test(v.lang)||/English/i.test(v.name));
+  appleVoices.sort((a,b)=>{
+    const score=v=>{
+      const n=v.name.toLowerCase();
+      let s=0;
+      if(/samantha|ava|allison|susan|karen|daniel|moira|serena/.test(n))s+=10;
+      if(/apple|siri/.test(n))s+=8;
+      if(/united states|us english/.test(n))s+=4;
+      return -s;
+    };
+    return score(a)-score(b)||a.name.localeCompare(b.name);
   });
+  return appleVoices;
 }
 
-function playFileWithoutStopping(src, run, volume=1){
+function getSelectedVoice(){
+  refreshAppleVoices();
+  return appleVoices.find(v=>v.name===selectedVoiceName)||
+         appleVoices.find(v=>/samantha/i.test(v.name))||
+         appleVoices.find(v=>/ava/i.test(v.name))||
+         appleVoices.find(v=>/^en-US$/i.test(v.lang))||
+         appleVoices[0]||null;
+}
+
+function speakApple(text,rate=selectedVoiceRate){
   return new Promise(resolve=>{
-    if(run!==audioRun){resolve();return}
-    const a=new Audio(src);
-    activeAudio=a;
-    a.preload="auto";
-    a.volume=volume;
-    a.onended=()=>{if(run===audioRun)activeAudio=null;resolve()};
-    a.onerror=()=>{if(run===audioRun)activeAudio=null;resolve()};
-    a.play().catch(()=>resolve());
+    if(!("speechSynthesis" in window)){resolve();return}
+    const run=++speechRun;
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    const voice=getSelectedVoice();
+    if(voice)u.voice=voice;
+    u.lang=voice?.lang||"en-US";
+    u.rate=rate;
+    u.pitch=1;
+    u.volume=1;
+    u.onend=()=>{if(run===speechRun)resolve()};
+    u.onerror=()=>resolve();
+    setTimeout(()=>speechSynthesis.speak(u),80);
   });
-}
-
-function wordAudioPath(word){
-  return `words_${word.toLowerCase()}.mp3?v=${AUDIO_VERSION}`;
-}
-
-function letterAudioPath(letter){
-  return `letters_${letter.toLowerCase()}.mp3?v=${AUDIO_VERSION}`;
-}
-
-function uiAudioPath(name){
-  return `ui_${name}.mp3?v=${AUDIO_VERSION}`;
 }
 
 async function sayWord(word){
-  stopAudio();const run=audioRun;const custom=await getRecordedAudio(`word:${word.toLowerCase()}`);if(run!==audioRun)return;
-  if(custom){const url=URL.createObjectURL(custom);await playFileWithoutStopping(url,run);URL.revokeObjectURL(url)}
-  else await playFileWithoutStopping(wordAudioPath(word),run);
+  stopAudio();
+  await speakApple(word,Math.min(.82,selectedVoiceRate+.05));
 }
 
 async function sayUi(name){
+  const phrases={"great-job":"Great job","try-again":"Try again","well-done":"Well done"};
   stopAudio();
-  const run=audioRun;
-  await playFileWithoutStopping(uiAudioPath(name),run);
+  await speakApple(phrases[name]||name,.82);
 }
 
 async function spellWord(word){
-  stopAudio();const run=audioRun;const letters=word.toUpperCase().split("");const nodes=[...document.querySelectorAll("[data-spell-letter]")];
-  nodes.forEach(n=>n.classList.remove("speaking"));await new Promise(r=>setTimeout(r,180));
+  stopAudio();
+  const run=++speechRun;
+  const letters=word.toUpperCase().split("");
+  const nodes=[...document.querySelectorAll("[data-spell-letter]")];
+  nodes.forEach(n=>n.classList.remove("speaking"));
+  await new Promise(r=>setTimeout(r,180));
   for(let i=0;i<letters.length;i++){
-    if(run!==audioRun)return;nodes.forEach(n=>n.classList.remove("speaking"));if(nodes[i])nodes[i].classList.add("speaking");
-    const custom=await getRecordedAudio(`letter:${letters[i]}`);
-    if(run!==audioRun)return;
-    if(custom){const url=URL.createObjectURL(custom);await playFileWithoutStopping(url,run);URL.revokeObjectURL(url)}
-    else await playFileWithoutStopping(letterAudioPath(letters[i]),run);
-    if(run!==audioRun)return;await new Promise(r=>setTimeout(r,420));
+    if(run!==speechRun)return;
+    nodes.forEach(n=>n.classList.remove("speaking"));
+    if(nodes[i])nodes[i].classList.add("speaking");
+    const u=new SpeechSynthesisUtterance(LETTER_SPEECH[letters[i]]||letters[i]);
+    const voice=getSelectedVoice();
+    if(voice)u.voice=voice;
+    u.lang=voice?.lang||"en-US";
+    u.rate=Math.max(.58,selectedVoiceRate-.08);
+    u.pitch=1;
+    await new Promise(resolve=>{
+      u.onend=resolve;u.onerror=resolve;
+      speechSynthesis.speak(u);
+    });
+    if(run!==speechRun)return;
+    await new Promise(r=>setTimeout(r,380));
   }
   nodes.forEach(n=>n.classList.remove("speaking"));
 }
@@ -119,5 +130,36 @@ async function importRecordings(file){try{const payload=JSON.parse(await file.te
 $$(".studio-tab").forEach(b=>b.onclick=()=>{$$(".studio-tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");studioTab=b.dataset.studioTab;$("#recorderPanel").hidden=true;renderStudioGrid()});
 $("#startRecordBtn").onclick=startRecording;$("#stopRecordBtn").onclick=stopRecording;$("#previewRecordBtn").onclick=previewRecording;$("#saveRecordBtn").onclick=saveRecording;$("#deleteRecordBtn").onclick=removeRecording;$("#exportAudioBtn").onclick=exportRecordings;$("#importAudioInput").onchange=e=>e.target.files[0]&&importRecordings(e.target.files[0]);$("#clearAudioBtn").onclick=async()=>{if(confirm("ล้างเสียงคนจริงทั้งหมดหรือไม่?")){await clearRecordedAudio();$("#recorderPanel").hidden=true;renderStudioGrid()}};
 
-$$('[data-mode]').forEach(b=>b.onclick=()=>start(b.dataset.mode));$$('[data-page]').forEach(b=>b.onclick=()=>b.dataset.page==='letters'?lettersPage():b.dataset.page==='studio'?studioPage():parent());$$('.back').forEach(b=>b.onclick=()=>show('home'));$('#wordBtn').onclick=()=>S.current&&sayWord(S.current.word);$('#spellBtn').onclick=()=>S.current&&spellWord(S.current.word);$('#resetBtn').onclick=()=>{if(confirm('ล้างข้อมูลทั้งหมดหรือไม่?')){S.progress={};save();parent()}};let dp=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('#installBtn').hidden=false});$('#installBtn').onclick=async()=>{if(dp){dp.prompt();await dp.userChoice;dp=null;$('#installBtn').hidden=true}};let ios=/iphone|ipad|ipod/i.test(navigator.userAgent),standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;if(ios&&!standalone)$('#iosTip').hidden=false;save();
-if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).finally(()=>navigator.serviceWorker.register('sw.js?v=50'))}
+
+function voicePage(){
+  show("voice");
+  populateVoiceSelect();
+}
+function populateVoiceSelect(){
+  const select=$("#voiceSelect");
+  const voices=refreshAppleVoices();
+  select.innerHTML=voices.length?voices.map(v=>`<option value="${v.name}">${v.name} — ${v.lang}${v.localService?" (ในเครื่อง)":""}</option>`).join(""):'<option>ไม่พบเสียงภาษาอังกฤษ</option>';
+  const chosen=getSelectedVoice();
+  if(chosen){select.value=chosen.name;selectedVoiceName=chosen.name}
+  $("#voiceRate").value=selectedVoiceRate;
+  $("#voiceRateValue").textContent=selectedVoiceRate.toFixed(2);
+  $("#voiceStatus").textContent=chosen?`กำลังใช้: ${chosen.name} (${chosen.lang})`:"ยังไม่พบเสียง กรุณารอสักครู่แล้วเปิดหน้านี้ใหม่";
+}
+speechSynthesis.onvoiceschanged=()=>{refreshAppleVoices();if(S.page==="voice")populateVoiceSelect()};
+$("#voiceSelect").onchange=e=>{selectedVoiceName=e.target.value;$("#voiceStatus").textContent=`เลือกแล้ว: ${selectedVoiceName}`};
+$("#voiceRate").oninput=e=>{selectedVoiceRate=Number(e.target.value);$("#voiceRateValue").textContent=selectedVoiceRate.toFixed(2)};
+$$("[data-test-letter]").forEach(b=>b.onclick=()=>speakApple(LETTER_SPEECH[b.dataset.testLetter],selectedVoiceRate));
+$("#testAIL").onclick=async()=>{
+  stopAudio();
+  for(const letter of ["A","I","L"]){
+    await speakApple(LETTER_SPEECH[letter],selectedVoiceRate);
+    await new Promise(r=>setTimeout(r,500));
+  }
+};
+$("#saveVoiceBtn").onclick=()=>{
+  localStorage.setItem(VOICE_PREF_KEY,JSON.stringify({name:selectedVoiceName,rate:selectedVoiceRate}));
+  $("#voiceStatus").textContent=`บันทึกแล้ว ✅ ${selectedVoiceName||"เสียงระบบ"} ความเร็ว ${selectedVoiceRate.toFixed(2)}`;
+};
+
+$$('[data-mode]').forEach(b=>b.onclick=()=>start(b.dataset.mode));$$('[data-page]').forEach(b=>b.onclick=()=>b.dataset.page==='letters'?lettersPage():b.dataset.page==='voice'?voicePage():b.dataset.page==='studio'?studioPage():parent());$$('.back').forEach(b=>b.onclick=()=>show('home'));$('#wordBtn').onclick=()=>S.current&&sayWord(S.current.word);$('#spellBtn').onclick=()=>S.current&&spellWord(S.current.word);$('#resetBtn').onclick=()=>{if(confirm('ล้างข้อมูลทั้งหมดหรือไม่?')){S.progress={};save();parent()}};let dp=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('#installBtn').hidden=false});$('#installBtn').onclick=async()=>{if(dp){dp.prompt();await dp.userChoice;dp=null;$('#installBtn').hidden=true}};let ios=/iphone|ipad|ipod/i.test(navigator.userAgent),standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;if(ios&&!standalone)$('#iosTip').hidden=false;save();
+if('serviceWorker'in navigator){navigator.serviceWorker.getRegistrations().then(rs=>rs.forEach(r=>r.unregister())).finally(()=>navigator.serviceWorker.register('sw.js?v=80'))}

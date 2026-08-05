@@ -1,12 +1,13 @@
 {
-  "name": "English Adventure V9.1 Complete",
-  "short_name": "English V9.1",
-  "start_url": "./index.html",
+  "name": "English Adventure V8 for iPhone & iPad",
+  "short_name": "English V8",
+  "description": "เกมภาษาอังกฤษที่ปรับเสียง Apple สำหรับ iPhone และ iPad",
+  "start_url": "./index.html?v=3",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fff9ef",
-  "theme_color": "#6657e8",
+  "background_color": "#fff8ea",
+  "theme_color": "#5b5ce2",
   "lang": "th",
   "icons": [
     {
@@ -21,6 +22,5 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ],
-  "description": "Monster Escape แก้เสียง capital และรีเซ็ตตำแหน่งตัวละครทุกคำ"
+  ]
 }

@@ -1,7 +1,7 @@
 {
-  "name": "English Adventure V3.3",
-  "short_name": "English V3.3",
-  "description": "โหมดเรียงตัวอักษรใช้รูปและเสียงสะกดโดยไม่มีคำตัวอย่าง",
+  "name": "English Adventure V4.2",
+  "short_name": "English V4.2",
+  "description": "เกมภาษาอังกฤษแบบไฟล์ทั้งหมดอยู่ในโฟลเดอร์หลัก ไม่มีโฟลเดอร์ assets",
   "start_url": "./index.html?v=3",
   "scope": "./",
   "display": "standalone",

@@ -1,0 +1,26 @@
+{
+  "name": "English Adventure V3",
+  "short_name": "English V3",
+  "description": "เกมฝึกตัวอักษร การอ่าน และการสะกด A–R",
+  "start_url": "./index.html?v=3",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff8ea",
+  "theme_color": "#5b5ce2",
+  "lang": "th",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

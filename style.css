@@ -13,3 +13,9 @@
 .voice-label select{padding:12px;border-radius:14px;border:2px solid #ddd;background:#fff;font-size:1rem}
 .voice-tests{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:16px 0}.voice-tests button{border:0;border-radius:15px;background:#f0efff;padding:13px;font-weight:900}
 .voice-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}.voice-compare div{text-align:center;background:#fff7d9;border-radius:16px;padding:13px}.voice-compare strong{display:block;font-size:2rem}.voice-compare small{color:#555}
+
+.difficulty-box{margin-top:15px;display:flex;gap:9px;justify-content:center;align-items:center;flex-wrap:wrap}.difficulty-box select{padding:10px;border-radius:13px;border:2px solid #ddd}
+.monster-track{position:relative;height:115px;border-radius:20px;background:linear-gradient(#dff4ff 0 60%,#d8efbd 60%);overflow:hidden}
+.hero-char,.monster-char{position:absolute;bottom:20px;font-size:55px;transition:left .4s ease}.hero-char{left:7%}.monster-char{left:84%;transform:scaleX(-1)}
+.monster-status{display:flex;justify-content:space-between;font-weight:900;margin:8px 3px}.danger-meter{height:14px;background:#eee;border-radius:99px;overflow:hidden}.danger-meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd166,#ef476f);transition:width .4s}
+.monster-message{font-weight:900;background:#fff4cc;border-radius:14px;padding:9px;text-align:center}.monster-caught{animation:shake .5s}@keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}}

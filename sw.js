@@ -1,4 +1,4 @@
-const CACHE="english-adventure-v4.2-no-folders";
+const CACHE="english-adventure-v5-human-audio";
 const ASSETS=[
 "./",
 "./index.html",

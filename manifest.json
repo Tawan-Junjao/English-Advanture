@@ -1,7 +1,7 @@
 {
-  "name": "English Adventure V4.2",
-  "short_name": "English V4.2",
-  "description": "เกมภาษาอังกฤษแบบไฟล์ทั้งหมดอยู่ในโฟลเดอร์หลัก ไม่มีโฟลเดอร์ assets",
+  "name": "English Adventure V5",
+  "short_name": "English V5",
+  "description": "เกมภาษาอังกฤษพร้อมห้องบันทึกเสียงคนจริงสำหรับตัวอักษรและคำศัพท์",
   "start_url": "./index.html?v=3",
   "scope": "./",
   "display": "standalone",

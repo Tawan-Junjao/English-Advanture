@@ -1,4 +1,4 @@
-const CACHE="english-adventure-v8-ios-apple-voice";
+const CACHE="english-adventure-v8-1-ios-apple-voice";
 const ASSETS=[
 "./",
 "./index.html",
